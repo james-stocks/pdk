@@ -20,20 +20,20 @@ module PDK::CLI
       report = nil
 
       if opts[:list]
-        puts _('List of all available unit tests: (TODO)')
-      end
+        PDK::Test::Unit.list
+      else
+        if opts[:tests]
+          tests = opts.fetch(:tests)
+        end
 
-      if opts[:tests]
-        tests = opts.fetch(:tests)
-      end
+        # Note: Reporting may be delegated to the validation tool itself.
+        if opts[:'report-file']
+          format = opts.fetch(:'report-format', PDK::Report.default_format)
+          report = Report.new(opts.fetch(:'report-file'), format)
+        end
 
-      # Note: Reporting may be delegated to the validation tool itself.
-      if opts[:'report-file']
-        format = opts.fetch(:'report-format', PDK::Report.default_format)
-        report = Report.new(opts.fetch(:'report-file'), format)
+        PDK::Test::Unit.invoke(tests, report)
       end
-
-      PDK::Test::Unit.invoke(tests, report)
     end
   end
 end
