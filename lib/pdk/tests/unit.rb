@@ -23,6 +23,11 @@ module PDK
         report.write(output) if report
       end
 
+      class RspecExecutionError < StandardError
+      end
+
+      # List current rspec examples
+      # @return array of { :id, :full_description }
       def self.list
         PDK::Util::Bundler.ensure_bundle!
         PDK::Util::Bundler.ensure_binstubs!('rspec-core')
@@ -37,15 +42,16 @@ module PDK
         if rspec_json_output['examples'].empty?
           rspec_message = rspec_json_output['messages'][0]
           if rspec_message == 'No examples found.' # rubocop:disable Style/GuardClause
-            puts _('No examples found.')
+            return []
           else
             raise PDK::CLI::FatalError, _('Unable to enumerate examples. rspec reported: %{message}' % { message: rspec_message })
           end
         else
-          puts _('Examples:')
+          examples = []
           rspec_json_output['examples'].each do |example|
-            puts "#{example['id']}\t#{example['full_description']}"
+            examples << { id: example['id'], full_description: example['full_description'] }
           end
+          examples
         end
       rescue JSON::ParserError => e
         raise PDK::CLI::FatalError, _('Failed to parse output from rspec: %{message}' % { message: e.message })

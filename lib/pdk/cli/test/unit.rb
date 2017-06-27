@@ -20,7 +20,15 @@ module PDK::CLI
       report = nil
 
       if opts[:list]
-        PDK::Test::Unit.list
+        examples = PDK::Test::Unit.list
+        if examples.empty?
+          puts _('No examples found.')
+        else
+          puts _('Examples:')
+          examples.each do |example|
+            puts _("%{id}\t%{description}" % { id: example[:id], description: example[:full_description] })
+          end
+        end
       else
         if opts[:tests]
           tests = opts.fetch(:tests)
