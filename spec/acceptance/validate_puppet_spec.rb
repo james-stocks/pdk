@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'pdk validate puppet', module_command: true do
+describe 'pdk validate puppet', 'audit:risk' => :high, 'audit:layer' => :unit, module_command: true do
   let(:junit_xsd) { File.join(RSpec.configuration.fixtures_path, 'JUnit.xsd') }
   let(:syntax_spinner_text) { %r{checking puppet manifest syntax}i }
   let(:lint_spinner_text) { %r{checking puppet manifest style}i }

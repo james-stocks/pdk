@@ -4,7 +4,7 @@ describe 'pdk new class', module_command: true do
   context 'in a new module' do
     include_context 'in a new module', 'new_class'
 
-    context 'when creating the main class' do
+    context 'when creating the main class', 'audit:risk' => :low, 'audit:layer' => :integration do
       describe command('pdk new class new_class') do
         its(:exit_status) { is_expected.to eq 0 }
         its(:stdout) { is_expected.to match(%r{Creating .* from template}) }
@@ -32,7 +32,7 @@ describe 'pdk new class', module_command: true do
       end
     end
 
-    context 'when creating an ancillary class' do
+    context 'when creating an ancillary class', 'audit:risk' => :high, 'audit:layer' => :integration do
       describe command('pdk new class new_class::bar') do
         its(:exit_status) { is_expected.to eq 0 }
         its(:stdout) { is_expected.to match(%r{Creating .* from template}) }
@@ -60,7 +60,7 @@ describe 'pdk new class', module_command: true do
       end
     end
 
-    context 'when creating a deeply nested class' do
+    context 'when creating a deeply nested class', 'audit:risk' => :high, 'audit:layer' => :integration do
       describe command('pdk new class new_class::bar::baz') do
         its(:exit_status) { is_expected.to eq 0 }
         its(:stdout) { is_expected.to match(%r{Creating .* from template}) }

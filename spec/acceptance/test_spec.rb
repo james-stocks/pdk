@@ -13,7 +13,7 @@ describe 'Using the test command' do
       FileUtils.rm_rf('not_a_module')
     end
 
-    describe command('pdk test unit') do
+    describe command('pdk test unit'), 'audit:risk' => :low, 'audit:layer' => :unit do
       its(:exit_status) { is_expected.not_to eq(0) }
       its(:stdout) { is_expected.to match(%r{no metadata\.json found}i) }
     end

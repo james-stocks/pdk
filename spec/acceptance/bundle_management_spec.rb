@@ -10,7 +10,7 @@ describe 'Managing Gemfile dependencies' do
       # @result = shell_ex("#{path_to_pdk} ", chdir: target_dir)
     end
 
-    describe command('pdk test unit') do
+    describe command('pdk test unit'), 'audit:risk' => :high, 'audit:layer' => :unit do
       its(:exit_status) { is_expected.to eq 0 }
       its(:stderr) { is_expected.to match(%r{Checking for missing Gemfile dependencies}i) }
 
@@ -32,7 +32,7 @@ describe 'Managing Gemfile dependencies' do
       FileUtils.mv('Gemfile.old', 'Gemfile', force: true)
     end
 
-    describe command('pdk test unit') do
+    describe command('pdk test unit'), 'audit:risk' => :low, 'audit:layer' => :integration do
       its(:exit_status) { is_expected.not_to eq 0 }
       its(:stderr) { is_expected.to match(%r{error parsing `gemfile`}i) }
     end

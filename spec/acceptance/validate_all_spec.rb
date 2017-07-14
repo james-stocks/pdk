@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'Running all validations' do
+describe 'Running all validations', 'audit:risk' => :high, 'audit:layer' => :unit do
   let(:junit_xsd) { File.join(RSpec.configuration.fixtures_path, 'JUnit.xsd') }
 
   context 'with a fresh module' do
