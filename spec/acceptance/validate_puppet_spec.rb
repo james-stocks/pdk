@@ -390,7 +390,7 @@ class foo {
     end
   end
 
-  context 'when auto-correcting manifest style problems' do
+  context 'when auto-correcting manifest style problems', :audit_layer => :acceptance do
     include_context 'in a new module', 'foo'
 
     before(:all) do

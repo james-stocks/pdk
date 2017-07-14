@@ -121,7 +121,7 @@ describe 'pdk validate ruby', :audit_risk => :high, :audit_layer => :unit, modul
     end
   end
 
-  context 'when auto-correcting violations' do
+  context 'when auto-correcting violations', :audit_layer => :acceptance do
     include_context 'in a new module', 'foo'
 
     before(:all) do
