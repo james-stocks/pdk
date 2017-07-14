@@ -1,7 +1,7 @@
 require 'spec_helper_acceptance'
 
-describe 'Creating a new module', 'audit:risk' => :high do
-  context 'when the --skip-interview option is used', 'audit:risk' => :high, 'audit:layer' => :acceptance do
+describe 'Creating a new module', :audit_risk => :high do
+  context 'when the --skip-interview option is used', :audit_risk => :high, :audit_layer => :acceptance do
     after(:all) do
       FileUtils.rm_rf('foo')
     end

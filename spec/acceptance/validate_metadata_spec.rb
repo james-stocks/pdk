@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'Running metadata validation', 'audit:risk' => :high, 'audit:layer' => :unit do
+describe 'Running metadata validation', :audit_risk => :high, :audit_layer => :unit do
   let(:spinner_text) { %r{checking metadata}i }
 
   context 'with a fresh module' do

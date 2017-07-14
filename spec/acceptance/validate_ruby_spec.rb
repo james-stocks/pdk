@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'pdk validate ruby', 'audit:risk' => :high, 'audit:layer' => :unit, module_command: true do
+describe 'pdk validate ruby', :audit_risk => :high, :audit_layer => :unit, module_command: true do
   let(:junit_xsd) { File.join(RSpec.configuration.fixtures_path, 'JUnit.xsd') }
 
   context 'with a fresh module' do

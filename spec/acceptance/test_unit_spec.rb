@@ -1,7 +1,7 @@
 require 'spec_helper_acceptance'
 require 'fileutils'
 
-describe 'Running unit tests', 'audit:risk' => :high, 'audit:layer' => :integration do
+describe 'Running unit tests', :audit_risk => :high, :audit_layer => :integration do
   context 'with a fresh module' do
     include_context 'in a new module', 'unit_test_module_new'
 

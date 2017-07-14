@@ -1,6 +1,6 @@
 require 'spec_helper_acceptance'
 
-describe 'When pdk is installed by a package', 'audit:risk' => :low, 'audit:layer' => :acceptance, package: true do
+describe 'When pdk is installed by a package', :audit_risk => :low, :audit_layer => :acceptance, package: true do
   describe command('which pdk') do
     its(:exit_status) { is_expected.to eq 0 }
     its(:stdout) { is_expected.to match(%r{#{default_installed_bin_dir}/pdk}) }
